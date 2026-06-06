@@ -1,0 +1,622 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezza Weekend Villas | Ultra Luxury Farmhouse Escape</title>
+    <meta name="description" content="Experience the ultimate luxury weekend retreat at Rezza Weekend Villas. Inner peace, nature connection, and premium farmhouse living.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+</head>
+<body>
+
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <h1 class="logo-text">REZZA</h1>
+            <div class="loader-bar"></div>
+            <p>Entering Peace...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <div class="logo breathe">REZZA</div>
+            <div class="nav-links">
+                <div class="nav-pill"></div>
+                <a href="#circular-showcase">Experience</a>
+                <a href="#amenities-3d">Amenities</a>
+                <a href="#location">Location</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#booking" class="btn-primary nav-btn">Reserve</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Smooth Scroll Container -->
+    <main data-scroll-container>
+        
+        <!-- Section 1: Hero -->
+        <section id="hero" class="vh-100 overlay-section">
+            <div class="hero-content">
+                <div class="hero-text-wrap">
+                    <span class="sub-title">Silence is the new luxury</span>
+                    <h1 class="reveal-text">Escape the City.<br>Discover Peace.</h1>
+                    <p class="fade-in">A curated collection of weekend villas designed for inner harmony and natural connection.</p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+                <span>Scroll to inhale</span>
+            </div>
+        </section>
+
+        <!-- Section: Entry Reveal (Sequence from folder) -->
+        <section id="entry-reveal">
+            <div class="sticky-container">
+                <canvas id="entry-canvas"></canvas>
+            </div>
+        </section>
+
+        <!-- Section: Weekend Homes -->
+        <section id="weekend-homes" class="padding-xl" style="position: relative; z-index: 5; background: #ffffff; width: 100%;">
+            <div class="container container-large">
+                <div class="wh-grid">
+                    <div class="wh-gallery">
+                        <div class="wh-img wh-img-1">
+                            <img src="wooden-villa-1.png" alt="Weekend Home">
+                        </div>
+                        <div class="wh-img wh-img-2">
+                            <img src="wooden-villa-2.png" alt="Luxury Villa">
+                        </div>
+                        <!-- Decorative elements -->
+                        <div class="wh-dots-bg"></div>
+                    </div>
+                    <div class="wh-text">
+                        <div class="wh-dots-top"></div>
+                        <h2 class="wh-title">WEEKEND HOMES</h2>
+                        <p class="wh-desc">Discover the true definition of natural getaways. We present to you the best deals for private villas in Lonavala, Alibaug & Panchgani with swimming pools for rent. Experience luxury, comfort, and natural beauty with a touch of class and elegance.</p>
+                        <div class="wh-card premium-card">
+                            <div class="wh-card-circle"></div>
+                            <div class="card-content-3d">
+                                <h3>ESCAPE TO<br><span>LUXURY VILLAS</span></h3>
+                                <p>Take a break from the routine hotels and plan a stay with your family and friends in the best luxurious and pet-friendly bungalows surrounded by nature's beauty.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Section: Premium Circular Showcase -->
+        <section id="circular-showcase" class="showcase-section" style="z-index: 10;">
+            <div class="showcase-bg-layers">
+                <div class="bg-layer active" style="background-image: url('wooden-villa-1.png');" data-index="0"></div>
+                <div class="bg-layer" style="background-image: url('pool.png');" data-index="1"></div>
+                <div class="bg-layer" style="background-image: url('interior.png');" data-index="2"></div>
+                <div class="bg-layer" style="background-image: url('hero.png');" data-index="3"></div>
+                <div class="bg-layer" style="background-image: url('wooden-villa-2.png');" data-index="4"></div>
+                <div class="bg-layer" style="background-image: url('family_legacy.png');" data-index="5"></div>
+                <div class="bg-layer" style="background-image: url('Whisk_56fa795bfeae0c0b07545f4dc143f6a8eg.png');" data-index="6"></div>
+                <div class="bg-overlay"></div>
+            </div>
+            
+            <div class="container container-large showcase-inner">
+                <!-- Left: Text Content -->
+                <div class="showcase-text">
+                    <div class="text-layer active" data-index="0">
+                        <span class="sc-subtitle">Architecture</span>
+                        <h2 class="sc-title">Organic<br>Structure</h2>
+                        <p class="sc-desc">Designed to breathe in perfect rhythm with the landscape, our villas utilize warm, sustainable materials that age with a timeless grace. Every beam and foundation is placed to respect the existing topography, creating a home that feels like it grew directly from the earth itself.</p>
+                    </div>
+                    <div class="text-layer" data-index="1">
+                        <span class="sc-subtitle">Wellness</span>
+                        <h2 class="sc-title">Liquid<br>Sanctuary</h2>
+                        <p class="sc-desc">Indulge in private infinity pools that seem to merge seamlessly with the morning mist. These temperature-controlled waters offer a meditative sensory experience, where the boundary between architecture and the elements simply dissolves into pure tranquility.</p>
+                    </div>
+                    <div class="text-layer" data-index="2">
+                        <span class="sc-subtitle">Living</span>
+                        <h2 class="sc-title">Modern<br>Zen</h2>
+                        <p class="sc-desc">Step into minimalist interiors meticulously crafted for maximum psychological peace. We use soft lighting, natural textures, and open-plan layouts to ensure that every room is a vessel for sunlight and a sanctuary from the relentless noise of the modern world.</p>
+                    </div>
+                    <div class="text-layer" data-index="3">
+                        <span class="sc-subtitle">Landscape</span>
+                        <h2 class="sc-title">Infinite<br>Horizon</h2>
+                        <p class="sc-desc">Perched strategically at the high edge of the valley, each villa offers an unobstructed 360-degree theater of nature. Watch the seasons change over untouched forests and rolling emerald hills from your expansive private deck, where the sky is your only ceiling.</p>
+                    </div>
+                    <div class="text-layer" data-index="4">
+                        <span class="sc-subtitle">Materials</span>
+                        <h2 class="sc-title">Timber<br>& Stone</h2>
+                        <p class="sc-desc">Sourced directly from the raw heart of the region, our hand-cut stone and cured timber reflect a deep commitment to regional honesty. These materials don't just build walls; they tell the ancient story of the mountains, providing a tactile connection to the wild.</p>
+                    </div>
+                    <div class="text-layer" data-index="5">
+                        <span class="sc-subtitle">Heritage</span>
+                        <h2 class="sc-title">Family<br>Legacy</h2>
+                        <p class="sc-desc">Invest in a space that anchors your family's future across generations. Our estates are designed as timeless vessels for connection—where grandfather and grandchild can share quiet mornings and bonfire nights, turning a weekend escape into a priceless family inheritance.</p>
+                    </div>
+                    <div class="text-layer" data-index="6">
+                        <span class="sc-subtitle">Sanctuary</span>
+                        <h2 class="sc-title">Quietude<br>Redefined</h2>
+                        <p class="sc-desc">Explore a profound silence that allows you to finally hear your own thoughts again. Here, the internal static of city life is replaced by the gentle rustle of teak leaves, the rhythmic call of the valley birds, and the soft, healing vibrations of absolute natural solitude.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Circular Interaction -->
+                <div class="showcase-visual">
+                    <div class="circle-container">
+                        <!-- Image Layers -->
+                        <div class="image-wrap">
+                            <div class="img-layer active" style="background-image: url('wooden-villa-1.png');" data-index="0"></div>
+                            <div class="img-layer" style="background-image: url('pool.png');" data-index="1"></div>
+                            <div class="img-layer" style="background-image: url('interior.png');" data-index="2"></div>
+                            <div class="img-layer" style="background-image: url('hero.png');" data-index="3"></div>
+                            <div class="img-layer" style="background-image: url('wooden-villa-2.png');" data-index="4"></div>
+                            <div class="img-layer" style="background-image: url('family_legacy.png');" data-index="5"></div>
+                            <div class="img-layer" style="background-image: url('Whisk_56fa795bfeae0c0b07545f4dc143f6a8eg.png');" data-index="6"></div>
+                        </div>
+
+                        <!-- Interactive Ring -->
+                        <div class="interaction-ring">
+                            <svg class="ring-svg" viewBox="0 0 100 100">
+                                <circle class="ring-bg" cx="50" cy="50" r="48" />
+                                <circle class="ring-progress" cx="50" cy="50" r="48" />
+                            </svg>
+                            <div class="draggable-dot float">
+                                <div class="dot-inner"></div>
+                            </div>
+                        </div>
+
+                        <!-- Indicators -->
+                        <div class="circle-indicators">
+                            <span class="ind ind-0 active">01</span>
+                            <span class="ind ind-1">02</span>
+                            <span class="ind ind-2">03</span>
+                            <span class="ind ind-3">04</span>
+                            <span class="ind ind-4">05</span>
+                            <span class="ind ind-5">06</span>
+                            <span class="ind ind-6">07</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section: Legacy (Dynamic Image) -->
+        <section id="legacy" class="padding-xl">
+            <div class="container container-medium">
+                <div class="legacy-card reveal-image">
+                    <img src="family_legacy.png" alt="Family Legacy">
+                    <div class="legacy-overlay">
+                        <div class="legacy-content">
+                            <span class="legacy-script">A small investment</span>
+                            <h2 class="legacy-title">Today</h2>
+                            <p>will become a priceless legacy for future generations.</p>
+                            <div class="legacy-footer">
+                                <span>www.rezzavillas.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Experience (Horizontal Scroll) -->
+        <section id="experience" class="h-scroll-section" style="z-index: 15; background: #000;">
+            <div class="h-scroll-content">
+                <div class="scroll-card">
+                    <div class="card-bg" style="background-image: url('pool.png');"></div>
+                    <div class="card-info">
+                        <h3>Private Infinity Pool</h3>
+                        <p>Merge with the horizon in your personal sanctuary.</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <div class="card-bg" style="background-image: url('interior.png');"></div>
+                    <div class="card-info">
+                        <h3>Modern Zen Living</h3>
+                        <p>Interiors crafted for peace, with natural textures and light.</p>
+                    </div>
+                </div>
+                <div class="scroll-card">
+                    <div class="card-bg" style="background-image: url('Whisk_56fa795bfeae0c0b07545f4dc143f6a8eg.png');"></div>
+                    <div class="card-info">
+                        <h3>Organic Farming</h3>
+                        <p>Connect with the soil and harvest your own peace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Premium Amenities Slider -->
+        <section id="amenities-3d" class="padding-xl" style="position: relative; z-index: 20; background: #000;">
+            <div class="container container-large">
+                <div class="am-wrapper">
+                    <div class="am-header text-center">
+                        <span class="sc-subtitle" style="color: var(--accent);">Exceptional Living</span>
+                        <h2 class="sc-title">Essential Luxury</h2>
+                        <div class="am-badge" style="background: rgba(197, 160, 89, 0.1); color: var(--accent); border: 1px solid rgba(197,160,89,0.3);">25+ Curated Amenities</div>
+                    </div>
+                    <div class="am-carousel-container">
+                        <button class="am-nav am-prev">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        
+                        <div class="am-grid">
+                            <!-- Basic Amenities -->
+                            <div class="am-card">
+                                <div class="am-icon"><i class="ri-parking-box-line"></i></div>
+                                <span>Secured Parking</span>
+                            </div>
+                            <div class="am-card">
+                                <div class="am-icon"><i class="ri-shield-user-line"></i></div>
+                                <span>24/7 Security</span>
+                            </div>
+                            <div class="am-card">
+                                <div class="am-icon"><i class="ri-flashlight-line"></i></div>
+                                <span>Power Backup</span>
+                            </div>
+                            <div class="am-card">
+                                <div class="am-icon"><i class="ri-drop-line"></i></div>
+                                <span>Pure Water Supply</span>
+                            </div>
+                            
+                            <!-- Premium Amenities -->
+                            <div class="am-card">
+                                <div class="am-icon"><i class="ri-sun-line"></i></div>
+                                <span>Swimming Pool</span>
+                            </div>
+                            <div class="am-card">
+                                <div class="am-icon"><i class="ri-heart-pulse-line"></i></div>
+                                <span>Modern Gym</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-community-line"></i></div>
+                                <span>Grand Clubhouse</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-mickey-line"></i></div>
+                                <span>Childrens Play Area</span>
+                            </div>
+
+                            <!-- High-End Luxury -->
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-cactus-line"></i></div>
+                                <span>Jogging Track</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-plant-line"></i></div>
+                                <span>Spa & Wellness</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-windy-line"></i></div>
+                                <span>Yoga & Meditation</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-temp-hot-line"></i></div>
+                                <span>Private Jacuzzi</span>
+                            </div>
+
+                            <!-- Lifestyle + Nature -->
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-cup-line"></i></div>
+                                <span>Co-working Cafe</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-landscape-line"></i></div>
+                                <span>Landscape Garden</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-home-heart-line"></i></div>
+                                <span>Gazebo Seating</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-drop-line"></i></div>
+                                <span>Water Fountain</span>
+                            </div>
+
+                            <!-- Smart Modern -->
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-ghost-line"></i></div>
+                                <span>Pet Park</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-router-line"></i></div>
+                                <span>High-speed WiFi</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-battery-2-charge-line"></i></div>
+                                <span>EV Charging</span>
+                            </div>
+                            <div class="am-card extra-amenity">
+                                <div class="am-icon"><i class="ri-smartphone-line"></i></div>
+                                <span>Smart Home Tech</span>
+                            </div>
+                        </div>
+
+                        <button class="am-nav am-next">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- View More Button -->
+                    <div class="am-more-wrap text-center" style="margin-top: 4rem;">
+                        <button id="view-all-amenities" class="btn-primary" style="background: transparent; border: 1px solid var(--accent); color: var(--accent) !important;">View All Amenities</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Section 6: Location -->
+        <section id="location" class="location-section padding-xl">
+            <div class="container container-large">
+                <div class="location-box premium-card">
+                    <div class="location-text card-content-3d">
+                        <span class="sc-subtitle">The Geometry</span>
+                        <h2 class="sc-title">Secret<br>Sanctuary</h2>
+                        <p>Nestled safely away from the urban chaos, yet accessible enough for a spontaneous escape. Just 90 minutes from the city center.</p>
+                        <ul class="dist-list">
+                            <li>
+                                <div class="dist-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1.1.4 1.4L9 12l-4 4-2.5-.5c-.5-.1-1 .1-1.2.6l-.3.5c-.2.5 0 1.1.5 1.4l5 2c.5.2 1.1 0 1.4-.5l.5-.3c.5-.2.7-.8.6-1.2L9 15l4 4 3.4 5.2c.3.5.9.6 1.4.4l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>
+                                    <span>Airport</span>
+                                </div>
+                                <strong>45 mins</strong>
+                            </li>
+                            <li>
+                                <div class="dist-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    <span>City Center</span>
+                                </div>
+                                <strong>90 mins</strong>
+                            </li>
+                            <li>
+                                <div class="dist-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
+                                    <span>Nature Preserve</span>
+                                </div>
+                                <strong>20 mins</strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="location-map" id="map-3d">
+                        <img src="location.png" alt="Secret Geography" class="location-visual-img">
+                        
+                        <!-- Google Maps UI Overlay -->
+                        <div class="map-ui-overlay">
+                            <div class="g-search-bar">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <span>Search for Rezza Villas...</span>
+                            </div>
+
+                            <div class="g-place-card glass">
+                                <div class="g-place-header">
+                                    <h3>Rezza Villas</h3>
+                                    <span>4.9 ★ (128 reviews)</span>
+                                </div>
+                                <p>Luxury Farmhouse Estate</p>
+                                <div class="g-actions">
+                                    <a href="https://maps.google.com" target="_blank" class="g-btn-nav">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                        Directions
+                                    </a>
+                                    <button class="g-btn-save">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="map-pin-container">
+                            <div class="map-pin">
+                                <div class="pin-head"></div>
+                                <div class="pin-tail"></div>
+                            </div>
+                            <span class="map-label">REZZA VILLAS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Gallery -->
+        <section id="gallery" class="gallery-section padding-xl" style="background: #000;">
+            <div class="container container-large">
+                <div class="gallery-header text-center" style="margin-bottom: 5rem;">
+                    <span class="sc-subtitle" style="color: var(--accent);">Visual Journey</span>
+                    <h2 class="sc-title" style="color: white;">Gallery</h2>
+                </div>
+                <!-- Grid Track -->
+                <div class="gallery-track">
+                    <div class="gallery-item video-item">
+                        <video src="GALLERY ITEM.mp4" autoplay muted loop playsinline></video>
+                    </div>
+                    <div class="gallery-item video-item">
+                        <video src="A_panoramic,_high-end_202604171223.mp4" autoplay muted loop playsinline></video>
+                    </div>
+                    <div class="gallery-item extra-gallery"><img src="wooden-villa-1.png" alt="Architecture"></div>
+                    <div class="gallery-item extra-gallery"><img src="interior.png" alt="Interior Design"></div>
+                    <div class="gallery-item extra-gallery"><img src="pool.png" alt="Infinity Pool"></div>
+                    <div class="gallery-item extra-gallery"><img src="wooden-villa-2.png" alt="Modern Living"></div>
+                    <div class="gallery-item extra-gallery"><img src="family_legacy.png" alt="Family Legacy"></div>
+                    <div class="gallery-item extra-gallery"><img src="hero.png" alt="Rezza Sanctuary"></div>
+                    <div class="gallery-item extra-gallery"><img src="location.png" alt="Site Map"></div>
+                </div>
+
+                <div class="gallery-more-wrap" style="display: none;">
+                    <button id="view-all-gallery" class="btn-secondary">View Full Gallery</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Home Animation (Sequence from home animation folder) -->
+        <section id="home-animation" style="position: relative; background: #000; overflow: hidden;">
+            <div class="sticky-container">
+                <canvas id="home-anim-canvas" style="width: 100%; height: 100vh; object-fit: cover;"></canvas>
+                <div class="home-anim-text" style="position: absolute; top: 50%; left: 10%; transform: translateY(-50%); z-index: 5; max-width: 500px;">
+                    <span class="sc-subtitle" style="color: var(--accent); opacity: 0; transform: translateY(30px);">Final Vision</span>
+                    <h2 class="sc-title" style="color: white; font-size: 4rem; opacity: 0; transform: translateY(30px);">The Culmination<br>of Quiet</h2>
+                    <p class="sc-desc" style="color: rgba(255,255,255,0.6); margin-top: 2rem; opacity: 0; transform: translateY(30px);">Every detail has led to this. A home that doesn't just sit on the land, but belongs to it. Experience the final expression of Rezza's architectural philosophy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Booking -->
+        <section id="booking" class="booking-section padding-xl">
+            <div class="container container-large">
+                <div class="booking-wrapper premium-card overflow-hidden">
+                    <div class="booking-info-side">
+                        <div class="info-bg-overlay"></div>
+                        <img src="hero.png" alt="Rezza Living" class="info-bg-img">
+                        <div class="info-content-wrap">
+                            <span class="sc-subtitle" style="color: var(--accent);">Reservations</span>
+                            <h2 class="legacy-title" style="color: white; font-size: 4rem;">Begin Your<br>Journey</h2>
+                            <p style="opacity: 0.8; margin-bottom: 3rem;">Schedule a private consultation with our sales curators to explore available plots and custom villa designs.</p>
+                                                         <div class="contact-details">
+                                <div class="c-item">
+                                    <i class="ri-map-pin-line"></i>
+                                    <span>Tungarli Hill, Lonavala, MH 410401</span>
+                                </div>
+                                <div class="c-item">
+                                    <i class="ri-phone-line"></i>
+                                    <a href="tel:+919106027361" style="color: inherit; text-decoration: none;">+91 91060 27361</a>
+                                </div>
+                                <div class="c-item">
+                                    <i class="ri-mail-line"></i>
+                                    <a href="mailto:hello@rezzavillas.com" style="color: inherit; text-decoration: none;">hello@rezzavillas.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form-side">
+                        <form id="booking-form" autocomplete="off" novalidate>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="full-name">Full Name</label>
+                                    <input type="text" id="full-name" name="full-name" placeholder="John Doe" required>
+                                    <span class="error-msg"></span>
+                                </div>
+                                <div class="input-group">
+                                    <label for="email-address">Email Address</label>
+                                    <input type="email" id="email-address" name="email-address" placeholder="john@example.com" required>
+                                    <span class="error-msg"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="phone-number">Phone Number</label>
+                                    <input type="tel" id="phone-number" name="phone-number" placeholder="10-digit number" required maxlength="10">
+                                    <span class="error-msg"></span>
+                                </div>
+                                <div class="input-group">
+                                    <label for="visit-date">Preferred Date</label>
+                                    <input type="date" id="visit-date" name="visit-date" required>
+                                    <span class="error-msg"></span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="message">Special Requests (Optional)</label>
+                                <textarea id="message" name="message" rows="3" placeholder="Tell us about your dream weekend escape..." maxlength="300"></textarea>
+                                <span class="char-count">0 / 300</span>
+                                <span class="error-msg"></span>
+                            </div>
+                            
+                            <div class="booking-footer">
+                                <p class="privacy-note">By submitting, you agree to our <a href="privacy-policy.html">Privacy Policy</a>. Our curators will contact you within 24 hours.</p>
+                                <button type="submit" id="submit-booking" class="btn-submit ripple-btn" disabled>Request Consultation <i class="ri-arrow-right-line"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Section: Cinematic Footer -->
+        <footer class="premium-footer">
+            <div class="container container-large">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <h2 class="footer-logo">REZZA</h2>
+                        <p class="brand-tagline">Architecting Silence. Curating Peace.</p>
+                        <div class="social-links-premium">
+                            <a href="https://instagram.com/rezza" target="_blank" class="social-circle"><i class="ri-instagram-line"></i><span>Instagram</span></a>
+                            <a href="https://linkedin.com/company/rezza" target="_blank" class="social-circle"><i class="ri-linkedin-line"></i><span>LinkedIn</span></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-nav-grid">
+                        <div class="footer-col">
+                            <h4>Experience</h4>
+                            <ul>
+                                <li><a href="#circular-showcase">Highlights</a></li>
+                                <li><a href="#amenities-3d">Amenities</a></li>
+                                <li><a href="#location">Location</a></li>
+                                <li><a href="#gallery">Gallery</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Legal</h4>
+                            <ul>
+                                <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li>
+                                <li><a href="terms-conditions.html" target="_blank">Terms of Use</a></li>
+                                <li><a href="disclaimer.html" target="_blank">Disclaimer</a></li>
+                                <li><a href="admin.html" style="color: var(--accent); font-weight: 600;"><i class="ri-user-settings-line"></i> Admin Portal</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4>Connect</h4>
+                            <div class="footer-contact">
+                                <a href="mailto:hello@rezzavillas.com">hello@rezzavillas.com</a><br>
+                                <a href="tel:+919106027361">+91 91060 27361</a>
+                            </div>
+                            <a href="#booking" class="btn-primary btn-mini">Book A Visit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom-premium">
+                    <p>&copy; 2026 Rezza Weekend Villas. All rights reserved.</p>
+                    <div class="credits" style="text-align: right; color: rgba(255, 255, 255, 0.6
+                    ); font-size: 0.85rem; letter-spacing: 2px;">
+                        <p style="margin-bottom: 5px;">DESIGNED BY <a href="https://truetwist.in/" target="_blank" style="color: #c5a059; text-decoration: none;">TRUETWIST</a></p>
+                        <p>MARKETING BY <a href="https://369network.com/" target="_blank" style="color: #c5a059; text-decoration: none;">369 NETWORK</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
