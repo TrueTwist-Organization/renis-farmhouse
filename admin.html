@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezza CRM | Executive Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg: #0d0f0d;
+            --sidebar: #0a0c0a;
+            --accent: #C5A059;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.5);
+            --success: #4CAF50;
+            --danger: #ff4d4d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            letter-spacing: 0.01em;
+        }
+
+        .dashboard-container { display: flex; min-height: 100vh; }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--glass-border);
+            position: fixed;
+            height: 100vh;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.3rem;
+            color: var(--accent);
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .side-nav { flex: 1; }
+        .nav-link {
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: all 0.4s ease;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text);
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+        }
+
+        .nav-link i { font-size: 1.4rem; color: var(--accent); opacity: 0.7; }
+        .nav-link.active i { opacity: 1; }
+
+        .side-footer { padding-top: 2rem; border-top: 1px solid var(--glass-border); }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 4rem 5rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .header-left h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; line-height: 1.2; margin-bottom: 0.5rem; }
+        .header-left p { color: var(--text-dim); font-size: 1.1rem; }
+
+        /* --- Stats Grid --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            padding: 2.5rem;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 100px; height: 100px;
+            background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
+            opacity: 0.05;
+            filter: blur(20px);
+        }
+
+        .stat-card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15rem; color: var(--text-dim); margin-bottom: 1rem; }
+        .stat-card .val { font-size: 3rem; font-weight: 700; color: var(--text); }
+        .stat-card .trend { font-size: 0.9rem; color: var(--success); margin-top: 0.5rem; display: block; }
+
+        /* --- Table View --- */
+        .glass-panel {
+            background: var(--glass);
+            border-radius: 40px;
+            padding: 3rem;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(30px);
+        }
+
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+        .panel-header h2 { font-size: 1.5rem; font-weight: 600; }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0 1rem; }
+        th { text-align: left; padding: 1.2rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2rem; color: var(--accent); }
+        
+        tr.lead-row {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        tr.lead-row td {
+            background: rgba(255,255,255,0.02);
+            padding: 1.8rem 1.2rem;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        tr.lead-row td:first-child { border-left: 1px solid var(--glass-border); border-radius: 20px 0 0 20px; }
+        tr.lead-row td:last-child { border-right: 1px solid var(--glass-border); border-radius: 0 20px 20px 0; }
+
+        tr.lead-row:hover td { background: rgba(197, 160, 89, 0.05); }
+
+        .lead-name { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .lead-contact { font-size: 0.85rem; color: var(--text-dim); }
+
+        .status-badge {
+            padding: 0.6rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            border: 1px solid currentColor;
+        }
+
+        .st-new { color: #D4AF37; background: rgba(212, 175, 55, 0.1); } /* Gold */
+        .st-contacted { color: #A8A8A8; background: rgba(168, 168, 168, 0.1); } /* Silver/Contacted */
+        .st-closed { color: #8FBC8F; background: rgba(143, 188, 143, 0.1); } /* Sage/Success */
+
+        .action-btns { display: flex; gap: 0.8rem; }
+        .btn-circle {
+            width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            background: var(--glass); color: var(--text-dim); transition: all 0.4s ease;
+        }
+        .btn-circle:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg); }
+        .btn-del:hover { border-color: var(--danger); color: var(--danger); }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+
+        /* --- Modal Upgrade --- */
+        #edit-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-card {
+            background: var(--sidebar);
+            width: 500px; padding: 4rem; border-radius: 40px; border: 1px solid var(--glass-border);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+        .modal-card h2 { font-family: 'Playfair Display', serif; margin-bottom: 2.5rem; font-size: 2rem; }
+        
+        .field { margin-bottom: 2rem; }
+        .field label { display: block; font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0.8; }
+        .field select, .field textarea {
+            width: 100%; padding: 1.2rem; background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 16px; color: white; outline: none; font-family: inherit; font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Fixing the Invisible Options Issue */
+        .field select option {
+            background-color: #1a1c1a; 
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        .btn-prime {
+            width: 100%; padding: 1.5rem; background: var(--accent); border: none; border-radius: 20px;
+            color: var(--bg); font-weight: 700; cursor: pointer; font-size: 1rem; transition: transform 0.3s;
+        }
+        .btn-prime:hover { transform: scale(1.02); }
+
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed; inset: 0; background: var(--bg); z-index: 2000;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .login-card {
+            width: 450px; padding: 5rem; text-align: center;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 50px; backdrop-filter: blur(40px);
+        }
+        .login-card input {
+            width: 100%; padding: 1.5rem; margin-bottom: 1.5rem;
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            border-radius: 20px; color: white; text-align: center;
+        }
+
+        /* --- Authentication Animation --- */
+        .shake { animation: shake 0.4s ease-in-out; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-overlay">
+        <div class="login-card">
+            <div class="logo">REZZA</div>
+            <h2 style="font-family: 'Playfair Display'; margin-bottom: 3rem; font-weight: 700;">Executive Access</h2>
+            <div id="login-form">
+                <input type="text" id="login-user" placeholder="User Identifier">
+                <input type="password" id="login-pass" placeholder="Password">
+                <button onclick="attemptLogin()" class="btn-prime">Verify Authority</button>
+                <p id="login-err" style="color: var(--danger); margin-top: 2rem; display: none; font-size: 0.9rem;">Access Denied. Credentials Invalid.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">REZZA</div>
+            <nav class="side-nav">
+                <div class="nav-link active" onclick="switchTab('leads', this)"><i class="ri-apps-2-line"></i> <span>Leads Center</span></div>
+                <div class="nav-link" onclick="switchTab('clients', this)"><i class="ri-team-line"></i> <span>Converted Leads</span></div>
+            </nav>
+            <div class="side-footer">
+                <div class="nav-link" onclick="window.location.href='index.html'" style="color: var(--accent); border: 1px solid rgba(197, 160, 89, 0.2);">
+                    <i class="ri-external-link-line"></i> <span>Public Portal</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h1>Executive Overview</h1>
+                    <p>Managing the Rezza Boutique Villa collection.</p>
+                </div>
+                <div class="header-right">
+                    <button onclick="exportLeads()" class="btn-circle" style="width: auto; padding: 0 2rem; border-radius: 100px; gap: 0.8rem;">
+                        <i class="ri-file-download-line"></i> Export Analytics
+                    </button>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card"><h3>Total Inquiries</h3><div class="val" id="count-total">0</div><span class="trend">+12% this week</span></div>
+                <div class="stat-card"><h3>Active Follow-ups</h3><div class="val" id="count-active" style="color: var(--accent)">0</div><span class="trend" style="color: var(--accent)">Urgent attention</span></div>
+                <div class="stat-card"><h3>Successful Closures</h3><div class="val" id="count-closed" style="color: var(--success)">0</div><span class="trend">+5 finalized</span></div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-header">
+                    <h2>Recent Engagements</h2>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">LIVE DATABASE FEED</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Engagement Date</th>
+                            <th>Lead Profile</th>
+                            <th>Message Origin</th>
+                            <th>Current State</th>
+                            <th>Management</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leads-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal">
+        <div class="modal-card">
+            <h2>Optimize Lead</h2>
+            <input type="hidden" id="edit-index">
+            <div class="field">
+                <label>Update Progression Status</label>
+                <select id="edit-status">
+                    <option value="New Lead">Initial Contact (New)</option>
+                    <option value="Contacted">Active Negotiation (Contacted)</option>
+                    <option value="Closed">Deal Secured (Closed)</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Executive Internal Notes</label>
+                <textarea id="edit-notes" rows="5" placeholder="Add confidential observations..."></textarea>
+            </div>
+            <div class="modal-btns" style="display: flex; gap: 1.5rem;">
+                <button class="btn-prime" style="background: var(--glass); color: white; border: 1px solid var(--glass-border);" onclick="closeModal()">Dismiss</button>
+                <button class="btn-prime" onclick="saveEdit()">Apply Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Authentication Logic ---
+        function attemptLogin() {
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+            const card = document.querySelector('.login-card');
+            const err = document.getElementById('login-err');
+
+            if (user === 'password@123' && pass === '123') {
+                sessionStorage.setItem('rezza_admin_auth', 'true');
+                gsap.to('#login-overlay', { opacity: 0, backdropFilter: 'blur(0px)', duration: 0.8, onComplete: () => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                }});
+                loadLeads();
+            } else {
+                card.classList.add('shake');
+                err.style.display = 'block';
+                setTimeout(() => card.classList.remove('shake'), 400);
+            }
+        }
+
+        if (sessionStorage.getItem('rezza_admin_auth') === 'true') {
+            document.getElementById('login-overlay').style.display = 'none';
+        }
+
+        // --- Lead Management ---
+        let currentView = 'leads';
+
+        function switchTab(view, el) {
+            currentView = view;
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            el.classList.add('active');
+            loadLeads();
+            
+            // Update Title
+            const title = document.querySelector('.header-left h1');
+            title.textContent = view === 'leads' ? 'Leads Center' : 'Converted Leads';
+
+            // Hide/Show Stats for clean view
+            const stats = document.querySelector('.stats-grid');
+            if (view === 'clients') {
+                stats.style.display = 'none';
+                document.querySelector('.header-left p').textContent = 'Managing your exclusive community of sanctuary owners.';
+            } else {
+                stats.style.display = 'grid';
+                document.querySelector('.header-left p').textContent = 'Managing the Rezza Boutique Villa collection.';
+            }
+        }
+
+        function loadLeads() {
+            const leads = JSON.parse(localStorage.getItem('rezza_leads') || '[]');
+            const container = document.getElementById('leads-body');
+            container.innerHTML = '';
+
+            // Filter logic
+            const filteredLeads = leads.filter(l => {
+                if (currentView === 'leads') {
+                    return l.status !== 'Closed';
+                } else {
+                    return l.status === 'Closed';
+                }
+            });
+
+            // Update stats
+            document.getElementById('count-total').textContent = leads.length;
+            document.getElementById('count-active').textContent = leads.filter(l => l.status !== 'Closed').length;
+            document.getElementById('count-closed').textContent = leads.filter(l => l.status === 'Closed').length;
+
+            filteredLeads.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp)).forEach((lead, i) => {
+                const date = new Date(lead.timestamp).toLocaleDateString('en-GB', {
+                    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+                }).toUpperCase();
+                
+                const tr = document.createElement('tr');
+                tr.className = 'lead-row';
+                const statusLabel = lead.status === 'New Lead' ? 'st-new' : (lead.status === 'Contacted' ? 'st-contacted' : 'st-closed');
+                
+                // Find actual original index in the full list for editing/deleting accurately
+                const originalIndex = leads.indexOf(lead);
+                
+                tr.innerHTML = `
+                    <td style="font-size: 0.75rem; letter-spacing: 0.05rem; opacity: 0.5;">${date}</td>
+                    <td>
+                        <div class="lead-name">${lead['full-name']}</div>
+                        <div class="lead-contact">${lead['email-address']} • ${lead['phone-number']}</div>
+                    </td>
+                    <td style="max-width: 200px; font-size: 0.85rem; opacity: 0.8; font-style: italic;">"${lead.message || 'Brief inquiry...'}"</td>
+                    <td><span class="status-badge ${statusLabel}">${lead.status}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-circle" onclick="openEdit(${originalIndex})"><i class="ri-quill-pen-line"></i></button>
+                            <button class="btn-circle btn-del" onclick="deleteLead(${originalIndex})"><i class="ri-delete-bin-2-line"></i></button>
+                        </div>
+                    </td>
+                `;
+                container.appendChild(tr);
+                gsap.from(tr, { opacity: 0, scale: 0.98, duration: 0.4, ease: 'power2.out' });
+            });
+        }
+
+        function openEdit(index) {
+            const leads = JSON.parse(localStorage.getItem('rezza_leads') || '[]');
+            const lead = leads[index];
+            
+            document.getElementById('edit-index').value = index;
+            document.getElementById('edit-status').value = lead.status;
+            document.getElementById('edit-notes').value = lead.notes || '';
+            
+            document.getElementById('edit-modal').style.display = 'flex';
+            gsap.from('.modal-card', { opacity: 0, y: 50, rotateX: -20, duration: 0.6, ease: 'back.out(1.4)' });
+        }
+
+        function closeModal() {
+            gsap.to('.modal-card', { opacity: 0, y: 50, duration: 0.4, onComplete: () => {
+                document.getElementById('edit-modal').style.display = 'none';
+            }});
+        }
+
+        function saveEdit() {
+            const index = document.getElementById('edit-index').value;
+            let leads = JSON.parse(localStorage.getItem('rezza_leads') || '[]');
+            leads.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            leads[index].status = document.getElementById('edit-status').value;
+            leads[index].notes = document.getElementById('edit-notes').value;
+            
+            localStorage.setItem('rezza_leads', JSON.stringify(leads));
+            closeModal();
+            loadLeads();
+        }
+
+        function deleteLead(index) {
+            if (confirm('Acknowledge: This action will permanently archive and remove this engagement record.')) {
+                let leads = JSON.parse(localStorage.getItem('rezza_leads') || '[]');
+                leads.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                leads.splice(index, 1);
+                localStorage.setItem('rezza_leads', JSON.stringify(leads));
+                loadLeads();
+            }
+        }
+
+        function exportLeads() {
+            const leads = JSON.parse(localStorage.getItem('rezza_leads') || '[]');
+            const csv = 'Date,Name,Email,Phone,Status\n' + 
+                leads.map(l => `${l.timestamp},${l['full-name']},${l['email-address']},${l['phone-number']},${l.status}`).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'REZZA_EXECUTIVE_EXPORT.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        loadLeads();
+    </script>
+</body>
+</html>

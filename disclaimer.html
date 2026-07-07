@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer | REZZA Sanctuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080a08;
+            --accent: #C9A96E;
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --gradient: radial-gradient(circle at center, #111511 0%, #080a08 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            background-image: var(--gradient);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .privacy-wrapper {
+            max-width: 800px;
+            padding: 4rem 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: revealPage 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes revealPage {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-content {
+            animation: subtleFloating 8s ease-in-out infinite;
+        }
+
+        @keyframes subtleFloating {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            33% { transform: translateY(-10px) translateX(5px); }
+            66% { transform: translateY(-5px) translateX(-5px); }
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            color: var(--accent);
+        }
+
+        .content-body {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 300;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            margin: 4rem auto;
+            opacity: 0.3;
+        }
+
+        .legal-footer {
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            opacity: 0.3;
+        }
+
+        /* Antigravity scroll container */
+        .antigravity-container {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">
+        <i class="ri-arrow-left-line"></i> Back to Sanctuary
+    </a>
+
+    <main class="privacy-wrapper">
+        <div class="antigravity-container floating-content">
+            <header>
+                <h1>Disclaimer</h1>
+            </header>
+
+            <div class="divider"></div>
+
+            <article class="content-body">
+                <p>
+                    The information provided on this website is for general informational purposes only. The visuals, floor plans, and amenities shown are artist's impressions and are indicative of the proposed development.
+                </p>
+                <p>
+                    We reserve the right to make modifications, additions, or deletions to the plans, specifications, and features without prior notice in the interest of the project.
+                </p>
+            </article>
+
+            <footer class="legal-footer">
+                &copy; 2026 REZZA Sanctuary. Eternal Peace.
+            </footer>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Subtle Anti-gravity effect on scroll
+        gsap.to(".antigravity-container", {
+            y: -100,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    </script>
+</body>
+</html>

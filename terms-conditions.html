@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | REZZA Sanctuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080a08;
+            --accent: #C9A96E;
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            background-image: radial-gradient(circle at top right, #111511 0%, #080a08 100%);
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+            padding: 10vh 5vw;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover { color: var(--accent); }
+
+        .terms-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .term-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: border-color 0.4s ease;
+        }
+
+        .term-card:hover {
+            border-color: var(--accent);
+        }
+
+        .term-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .term-card h2 span {
+            font-size: 0.9rem;
+            font-family: 'Outfit', sans-serif;
+            opacity: 0.4;
+            letter-spacing: 1px;
+        }
+
+        .term-card ul {
+            list-style: none;
+        }
+
+        .term-card li {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .term-card li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+
+        .legal-footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            opacity: 0.3;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+        }
+
+        /* Anti-gravity container override */
+        .antigravity-master {
+            will-change: transform;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 8vh 2rem; }
+            h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">
+        <i class="ri-arrow-left-line"></i> Back to Sanctuary
+    </a>
+
+    <div class="antigravity-master">
+        <main class="terms-wrapper">
+            <header id="terms-header">
+                <span class="subtitle">Legal Sanctuary</span>
+                <h1>Terms of Use</h1>
+            </header>
+
+            <div class="terms-grid">
+                <!-- 01 -->
+                <div class="term-card">
+                    <h2><span>01</span> Booking & Payment</h2>
+                    <ul>
+                        <li>All bookings must be confirmed with an advance payment.</li>
+                        <li>Full payment must be completed before check-in.</li>
+                        <li>Booking will be considered confirmed only after payment verification.</li>
+                        <li>Prices may vary based on date, season, and availability.</li>
+                    </ul>
+                </div>
+
+                <!-- 02 -->
+                <div class="term-card">
+                    <h2><span>02</span> Cancellation Policy</h2>
+                    <ul>
+                        <li>Cancellation before 7 days: Partial refund as per policy.</li>
+                        <li>Cancellation within 7 days: Non-refundable.</li>
+                        <li>In case of natural issues (rain, etc.), rescheduling may be offered.</li>
+                    </ul>
+                </div>
+
+                <!-- 03 -->
+                <div class="term-card">
+                    <h2><span>03</span> Arrival & Departure</h2>
+                    <ul>
+                        <li>Standard Check-in time: 12:00 PM</li>
+                        <li>Standard Check-out time: 10:00 AM</li>
+                        <li>Late check-out requests are subject to availability and charges.</li>
+                    </ul>
+                </div>
+
+                <!-- 04 -->
+                <div class="term-card">
+                    <h2><span>04</span> Security Deposit</h2>
+                    <ul>
+                        <li>A refundable security deposit is required during check-in.</li>
+                        <li>Property damage costs will be deducted from the deposit.</li>
+                    </ul>
+                </div>
+
+                <!-- 05 -->
+                <div class="term-card">
+                    <h2><span>05</span> Guest Responsibility</h2>
+                    <ul>
+                        <li>Guests must present valid government-issued ID proof.</li>
+                        <li>Illegal activities or prohibited items are strictly forbidden.</li>
+                        <li>Disturbance or loud music after allowed hours is not permitted.</li>
+                    </ul>
+                </div>
+
+                <!-- 06 -->
+                <div class="term-card">
+                    <h2><span>06</span> Property Rules</h2>
+                    <ul>
+                        <li>Maximum guest capacity must be strictly respected.</li>
+                        <li>Pets are permitted only with prior written approval.</li>
+                        <li>Swimming pool usage is at the guest's own risk.</li>
+                        <li>Guests are responsible for their personal assets.</li>
+                    </ul>
+                </div>
+
+                <!-- 07 -->
+                <div class="term-card">
+                    <h2><span>07</span> Damage Policy</h2>
+                    <ul>
+                        <li>Any damage to amenities or furniture will be chargeable.</li>
+                        <li>Guests are liable for repair or full replacement costs.</li>
+                    </ul>
+                </div>
+
+                <!-- 08 -->
+                <div class="term-card">
+                    <h2><span>08</span> Safety & Liability</h2>
+                    <ul>
+                        <li>Management is not liable for injury or loss during the stay.</li>
+                        <li>Follow all posted safety instructions while using facilities.</li>
+                    </ul>
+                </div>
+
+                <!-- 09 -->
+                <div class="term-card">
+                    <h2><span>09</span> Force Majeure</h2>
+                    <ul>
+                        <li>We are not liable for delays due to natural disasters or government restrictions.</li>
+                    </ul>
+                </div>
+
+                <!-- 10 -->
+                <div class="term-card">
+                    <h2><span>10</span> Protocol Updates</h2>
+                    <ul>
+                        <li>Terms may be updated at any time without prior notification.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <footer class="legal-footer">
+                &copy; 2026 REZZA Sanctuary. Eternal Peace.
+            </footer>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Header Reveal
+        gsap.to("#terms-header", {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "expo.out"
+        });
+
+        // Cards Staggered Reveal
+        gsap.to(".term-card", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.4
+        });
+
+        // Subtle Anti-gravity effect on scroll
+        gsap.to(".antigravity-master", {
+            y: -150,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    </script>
+</body>
+</html>
