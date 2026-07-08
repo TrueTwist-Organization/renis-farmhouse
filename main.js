@@ -59,24 +59,36 @@ function initHomeAnimation() {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    const frameCount = 80;
+    const frameCount = 40;
     const currentFrame = index => (
-        `home animation/Whisk_lldnwemnxmmyxqwmtytzkjwl3ywy00szlvgztyt_${index.toString().padStart(3, '0')}.jpg`
+        `home animation/Whisk_lldnwemnxmmyxqwmtytzkjwl3ywy00szlvgztyt_${(index * 2).toString().padStart(3, '0')}.jpg`
     );
 
-    const images = [];
+    const images = Array(frameCount).fill(null);
     const scrollObj = { frame: 0 };
-    let loadedImages = 0;
 
-    for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
-        img.onload = () => {
-            loadedImages++;
-            if (loadedImages === 1) render(); 
+    const loadImagesSequentially = async () => {
+        const concurrency = 3;
+        let index = 0;
+
+        const worker = async () => {
+            while (index < frameCount) {
+                const currentIdx = index++;
+                const img = new Image();
+                await new Promise((resolve) => {
+                    img.onload = img.onerror = resolve;
+                    img.src = currentFrame(currentIdx);
+                });
+                images[currentIdx] = img;
+                if (currentIdx === 0) render();
+            }
         };
-        img.src = currentFrame(i);
-        images.push(img);
-    }
+
+        const workers = Array(concurrency).fill(null).map(worker);
+        await Promise.all(workers);
+    };
+    
+    loadImagesSequentially();
 
     gsap.to(scrollObj, {
         frame: frameCount - 1,
@@ -110,9 +122,27 @@ function initHomeAnimation() {
     });
 
     function render() {
-        if (!images[scrollObj.frame]) return;
+        let targetFrame = scrollObj.frame;
+        if (!images[targetFrame]) {
+            let closest = -1;
+            let minDiff = Infinity;
+            for (let i = 0; i < frameCount; i++) {
+                if (images[i]) {
+                    const diff = Math.abs(i - targetFrame);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closest = i;
+                    }
+                }
+            }
+            if (closest !== -1) {
+                targetFrame = closest;
+            } else {
+                return;
+            }
+        }
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(images[scrollObj.frame], 0, 0, canvas.width, canvas.height);
+        context.drawImage(images[targetFrame], 0, 0, canvas.width, canvas.height);
     }
 }
 
@@ -183,24 +213,36 @@ function initEntryReveal() {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    const frameCount = 100;
+    const frameCount = 50;
     const currentFrame = index => (
-        `entry/Flow_202604171522 (online-video-cutter.com) (2)_${index.toString().padStart(3, '0')}.jpg`
+        `entry/Flow_202604171522 (online-video-cutter.com) (2)_${(index * 2).toString().padStart(3, '0')}.jpg`
     );
 
-    const images = [];
+    const images = Array(frameCount).fill(null);
     const airship = { frame: 0 };
-    let loadedImages = 0;
 
-    for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
-        img.onload = () => {
-            loadedImages++;
-            if (loadedImages === 1) render(); 
+    const loadImagesSequentially = async () => {
+        const concurrency = 3;
+        let index = 0;
+
+        const worker = async () => {
+            while (index < frameCount) {
+                const currentIdx = index++;
+                const img = new Image();
+                await new Promise((resolve) => {
+                    img.onload = img.onerror = resolve;
+                    img.src = currentFrame(currentIdx);
+                });
+                images[currentIdx] = img;
+                if (currentIdx === 0) render();
+            }
         };
-        img.src = currentFrame(i);
-        images.push(img);
-    }
+
+        const workers = Array(concurrency).fill(null).map(worker);
+        await Promise.all(workers);
+    };
+
+    loadImagesSequentially();
 
     gsap.to(airship, {
         frame: frameCount - 1,
@@ -220,9 +262,27 @@ function initEntryReveal() {
     });
 
     function render() {
-        if (!images[airship.frame]) return;
+        let targetFrame = airship.frame;
+        if (!images[targetFrame]) {
+            let closest = -1;
+            let minDiff = Infinity;
+            for (let i = 0; i < frameCount; i++) {
+                if (images[i]) {
+                    const diff = Math.abs(i - targetFrame);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closest = i;
+                    }
+                }
+            }
+            if (closest !== -1) {
+                targetFrame = closest;
+            } else {
+                return;
+            }
+        }
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(images[airship.frame], 0, 0, canvas.width, canvas.height);
+        context.drawImage(images[targetFrame], 0, 0, canvas.width, canvas.height);
     }
 }
 
